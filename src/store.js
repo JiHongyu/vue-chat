@@ -48,14 +48,14 @@ const store = new Vuex.Store({
         filterKey: ''
     },
     mutations: {
-        INIT_DATA(state) {
+        initData(state) {
             let data = localStorage.getItem('vue-chat-session');
             if (data) {
                 state.sessions = JSON.parse(data);
             }
         },
         // 发送消息
-        SEND_MESSAGE({sessions, currentSessionId}, content) {
+        sendMessage({sessions, currentSessionId}, content) {
             let session = sessions.find(item => item.id === currentSessionId);
             session.messages.push({
                 content: content,
@@ -64,24 +64,22 @@ const store = new Vuex.Store({
             });
         },
         // 选择会话
-        SELECT_SESSION(state, id) {
+        selectSession(state, id) {
             state.currentSessionId = id;
         },
         // 搜索
-        SET_FILTER_KEY(state, value) {
+        setFilterKey(state, value) {
             state.filterKey = value;
         }
     },
     getters: {
+        // 当前会话 session
+        session: ({sessions, currentSessionId}) => sessions.find(session => session.id === currentSessionId),
         // 过滤后的会话列表
-        sessions: ({sessions, filterKey}) => {
+        filteredSessions: ({sessions, filterKey}) => {
             let result = sessions.filter(session => session.user.name.includes(filterKey));
             return result;
-        },
-        // 当前会话index
-        currentId: ({currentSessionId}) => currentSessionId,
-        // 当前会话 session
-        session: ({sessions, currentSessionId}) => sessions.find(session => session.id === currentSessionId)
+        }
     }
 });
 

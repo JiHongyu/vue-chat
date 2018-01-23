@@ -8,12 +8,12 @@
             'filterKey',
         ]),
         methods: {
-            debounceOnKeyup: _.debounce(function (e) {
-                this.SET_FILTER_KEY(e.target.value);
-            }, 150),
             ...mapMutations([
-                'SET_FILTER_KEY',
-            ])
+                'setFilterKey',
+            ]),
+            debounceOnKeyup: _.debounce(function (e) {
+                this.setFilterKey(e.target.value);
+            }, 150),
         }
     };
 </script>

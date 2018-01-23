@@ -9,10 +9,10 @@
     export default {
         components: {Card, List, TextInput, Message},
         methods: mapMutations([
-            'INIT_DATA',
+            'initData',
         ]),
         created() {
-            this.INIT_DATA();
+            this.initData();
         }
     };
 </script>

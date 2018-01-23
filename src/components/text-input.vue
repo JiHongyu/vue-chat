@@ -10,13 +10,13 @@
         methods: {
             onKeyup(e) {
                 if (e.ctrlKey && e.keyCode === 13 && this.content.length) {
-                    this.SEND_MESSAGE(this.content);
+                    this.sendMessage(this.content);
                     this.content = '';
                 }
             },
             // (...) 对象展开运算符
             ...mapMutations([
-                'SEND_MESSAGE'
+                'sendMessage'
             ])
         }
     };
