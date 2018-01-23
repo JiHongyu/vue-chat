@@ -1,5 +1,5 @@
-var path = require('path')
-var webpack = require('webpack')
+const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
     // 入口文件
@@ -13,35 +13,35 @@ module.exports = {
     },
     resolve: {
         // require时省略的扩展名，如：require('module') 不需要module.js
-        extensions: ['', '.js', '.vue'],
+        extensions: ['.js', '.vue'],
         // 别名
         alias: {
-            components: path.join(__dirname, './src/components')
-        }
-    },
-    resolveLoader: {
-        root: path.join(__dirname, 'node_modules')
+            components: path.join(__dirname, './src/components'),
+            'vue$': 'vue/dist/vue.esm.js'
+        },
     },
     // 处理不同后缀的文件
     module: {
-        loaders: [{
+        rules: [{
             test: /\.vue$/,
-            loader: 'vue'
+            use: 'vue-loader'
         }, {
             test: /\.js$/,
-            loader: 'babel',
+            use: 'babel-loader',
             exclude: /node_modules/
         }, {
             test: /\.css$/,
-            loader: 'vue-style-loader!css-loader'
+            use: ['vue-style-loader', 'css-loader']
         }, {
             test: /\.less$/,
-            loader: 'vue-style-loader!css-loader!less-loader'
+            use: ['vue-style-loader', 'css-loader', 'less-loader']
         }, {
             test: /\.(png|jpg|gif|svg)$/,
-            loader: 'file',
-            query: {
-                name: '[name].[ext]?[hash]'
+            use: {
+                loader: 'file',
+                options: {
+                    name: '[name].[ext]?[hash]'
+                }
             }
         }]
     },
@@ -52,11 +52,11 @@ module.exports = {
     },
     // 开启source-map，webpack有多种source-map，在官网文档可以查到
     devtool: '#eval-source-map'
-}
+};
 
 // 生产环境，运行npm run build则执行这里
 if (process.env.NODE_ENV === 'production') {
-    module.exports.devtool = '#source-map'
+    module.exports.devtool = '#source-map';
     // http://vue-loader.vuejs.org/en/workflow/production.html
     module.exports.plugins = (module.exports.plugins || []).concat([
         // 环境变量
@@ -71,5 +71,5 @@ if (process.env.NODE_ENV === 'production') {
                 warnings: false
             }
         })
-    ])
+    ]);
 }
