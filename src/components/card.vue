@@ -1,10 +1,9 @@
 <script>
     import _ from 'lodash';
-    import {mapMutations, mapGetters} from 'vuex';
+    import {mapMutations, mapState} from 'vuex';
 
     export default {
-        // 使用对象展开运算符将 getter 混入 computed 对象中
-        computed: mapGetters([
+        computed: mapState([
             'user',
             'filterKey',
         ]),

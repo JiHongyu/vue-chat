@@ -1,11 +1,16 @@
 <script>
-    import {mapGetters} from 'vuex';
+    import {mapGetters, mapState} from 'vuex';
 
     export default {
-        computed: mapGetters([
-            'user',
-            'session'
-        ]),
+        computed: {
+            // 使用 (...) 对象展开运算符将 getter 以及 state 混入 computed 对象中
+            ...mapGetters([
+                'session'
+            ]),
+            ...mapState([
+                'user'
+            ])
+        },
         filters: {
             // 将日期过滤为 hour:minutes
             time(date) {

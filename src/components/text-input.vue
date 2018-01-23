@@ -14,6 +14,7 @@
                     this.content = '';
                 }
             },
+            // (...) 对象展开运算符
             ...mapMutations([
                 'SEND_MESSAGE'
             ])

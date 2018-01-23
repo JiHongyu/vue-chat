@@ -73,8 +73,6 @@ const store = new Vuex.Store({
         }
     },
     getters: {
-        user: ({user}) => user,
-        filterKey: ({filterKey}) => filterKey,
         // 过滤后的会话列表
         sessions: ({sessions, filterKey}) => {
             let result = sessions.filter(session => session.user.name.includes(filterKey));
