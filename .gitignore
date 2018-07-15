@@ -2,3 +2,7 @@
 node_modules/
 .idea
 npm-debug.log
+yarn.lock
+package-lock.json
+dist/
+

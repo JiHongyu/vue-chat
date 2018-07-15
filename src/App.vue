@@ -10,9 +10,11 @@
         components: {Card, List, TextInput, Message},
         methods: mapMutations([
             'initData',
+            'initWebSocket'
         ]),
         created() {
             this.initData();
+            this.initWebSocket();
         }
     };
 </script>
