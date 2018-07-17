@@ -9,14 +9,15 @@
         },
         methods: {
             onKeyUp(e) {
-                if (e.ctrlKey && e.keyCode === 13 && this.content.length) {
+                if (e.ctrlKey && e.keyCode === 13 && this.content.length && this.state.currentSessionId) {
                     this.sendMessage(this.content);
                     this.content = '';
                 }
             },
             // (...) 对象展开运算符
             ...mapMutations([
-                'sendMessage'
+                'sendMessage',
+                'state'
             ])
         }
     };

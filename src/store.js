@@ -8,7 +8,7 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 const now = new Date();
-const randId = Math.floor(Math.random()*1003457 + 100000000);
+const randId = Math.floor(Math.random()*6457 + 1001000);
 const store = new Vuex.Store({
     state: {
         // 当前用户
@@ -18,34 +18,20 @@ const store = new Vuex.Store({
             uid: randId
         },
         // 会话列表
-        sessions: [
-            {
-                id: 1,
-                user: {
-                    name: '示例介绍',
-                    img: 'dist/images/2.png'
-                },
-                messages: [
-                    {
-                        content: 'Hello，这是一个基于Vue + Vuex + Webpack构建的简单chat示例，聊天记录保存在localStorge, 有什么问题可以通过Github Issue问我。',
-                        date: now
-                    }, {
-                        content: '项目地址: https://github.com/coffcer/vue-chat',
-                        date: now
-                    }
-                ]
-            },
-            {
-                id: 2,
-                user: {
-                    name: 'webpack',
-                    img: 'dist/images/3.jpg'
-                },
-                messages: []
-            }
-        ],
+        /**
+         *
+         * {
+         *      id: 2,
+         *      user: {
+         *          name: 'webpack',
+         *          img: 'dist/images/3.jpg'
+         *      },
+         *      messages: []
+         *  }
+         */
+        sessions: [],
         // 当前选中的会话
-        currentSessionId: 1,
+        currentSessionId: null,
         // 过滤出只包含这个key的会话
         filterKey: '',
         webSocket: null
@@ -58,7 +44,7 @@ const store = new Vuex.Store({
             }
         },
         initWebSocket(state) {
-            state.webSocket = new WebSocket("ws://localhost:8085/websocket/" + randId);
+            state.webSocket = new WebSocket("ws://localhost:8080/websocket/" + randId);
 
             //连接发生错误的回调方法
             state.webSocket.onerror = () => {
@@ -74,7 +60,7 @@ const store = new Vuex.Store({
                 let res = JSON.parse(event.data);
                 let msg = res.data;
                 if(msg.type === 1){
-                    let session = state.sessions.find(item => item.id === state.currentSessionId);
+                    let session = state.sessions.find(item => item.id === msg.sender);
                     if(session){
                         session.messages.push({
                             content: msg.context,
