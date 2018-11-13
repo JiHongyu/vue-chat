@@ -6,9 +6,9 @@ module.exports = {
     entry: './src/main.js',
     output: {
         // 打包后输出的目录
-        path: path.resolve(__dirname, './dist'),
+        path: path.resolve(__dirname, './static/dist'),
         // 打包后资源文件的前缀
-        publicPath: '/dist/',
+        publicPath: '/static/dist/',
         filename: 'build.js'
     },
     resolve: {

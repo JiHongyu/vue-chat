@@ -14,7 +14,7 @@ const store = new Vuex.Store({
         // 当前用户
         user: {
             name: '' + randId,
-            img: 'dist/images/1.jpg',
+            img: 'static/dist/images/1.jpg',
             uid: randId
         },
         // 会话列表
@@ -75,7 +75,7 @@ const store = new Vuex.Store({
                     newUid.forEach(item => {
                         let newSession = {};
                         newSession.id = item;
-                        newSession.user = {name: ''+item,img: 'dist/images/2.png'};
+                        newSession.user = {name: ''+item,img: 'static/dist/images/2.png'};
                         newSession.messages = [];
                         existSession.push(newSession);
                     })
